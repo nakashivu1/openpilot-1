@@ -12,14 +12,14 @@ if [ "$ALIAS_CHECK" == "" ]; then
     mount -o remount,r /system
 fi
 
-if [ "$GET_PROP1" != "ko-KR" ]; then
-    setprop persist.sys.locale ko-KR
+if [ "$GET_PROP1" != "en-US" ]; then
+    setprop persist.sys.locale en-US
 fi
-if [ "$GET_PROP2" != "ko-KR" ]; then
-    setprop persist.sys.local ko-KR
+if [ "$GET_PROP2" != "en-US" ]; then
+    setprop persist.sys.local en-US
 fi
-if [ "$GET_PROP3" != "Asia/Seoul" ]; then
-    setprop persist.sys.timezone Asia/Seoul
+if [ "$GET_PROP3" != "America/New_York" ]; then
+    setprop persist.sys.timezone America/New_York
 fi
 
 if [ ! -f "/system/fonts/opensans_regular.ttf" ]; then
