@@ -514,7 +514,7 @@ UserPanel::UserPanel(QWidget* parent) : QWidget(parent) {
   layout->addWidget(new RunNaviOnBootToggle());
 
   layout->addWidget(horizontal_line());
-  layout->addWidget(new LabelControl("주행설정", ""));
+  layout->addWidget(new LabelControl("Driving Settings", ""));
   layout->addWidget(new AutoResumeToggle());
   layout->addWidget(new VariableCruiseToggle());
   layout->addWidget(new VariableCruiseProfile());
@@ -539,7 +539,7 @@ UserPanel::UserPanel(QWidget* parent) : QWidget(parent) {
   layout->addWidget(new MadModeEnabledToggle());
 
   layout->addWidget(horizontal_line());
-  layout->addWidget(new LabelControl("개발자", ""));
+  layout->addWidget(new LabelControl("Developer", ""));
   layout->addWidget(new DebugUiOneToggle());
   layout->addWidget(new DebugUiTwoToggle());
   layout->addWidget(new LongLogToggle());

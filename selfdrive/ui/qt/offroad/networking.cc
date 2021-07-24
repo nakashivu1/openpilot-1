@@ -82,7 +82,7 @@ void Networking::connectToNetwork(const Network &n) {
   } else if (n.security_type == SecurityType::OPEN) {
     wifi->connect(n);
   } else if (n.security_type == SecurityType::WPA) {
-    QString pass = InputDialog::getText(n.ssid + "의 패스워드를 입력하세요", 8);
+    QString pass = InputDialog::getText(n.ssid + "Please enter your password", 8);
     if (!pass.isEmpty()) {
       wifi->connect(n, pass);
     }
@@ -92,7 +92,7 @@ void Networking::connectToNetwork(const Network &n) {
 void Networking::wrongPassword(const QString &ssid) {
   for (Network n : wifi->seen_networks) {
     if (n.ssid == ssid) {
-      QString pass = InputDialog::getText(n.ssid + " 잘못된 패스워드 입니다", 8);
+      QString pass = InputDialog::getText(n.ssid + " Wrong password", 8);
       if (!pass.isEmpty()) {
         wifi->connect(n, pass);
       }
@@ -120,22 +120,22 @@ AdvancedNetworking::AdvancedNetworking(QWidget* parent, WifiManager* wifi): QWid
   main_layout->setSpacing(20);
 
   // Back button
-  QPushButton* back = new QPushButton("뒤로가기");
+  QPushButton* back = new QPushButton("BACK");
   back->setObjectName("back_btn");
   back->setFixedSize(500, 100);
   connect(back, &QPushButton::released, [=]() { emit backPress(); });
   main_layout->addWidget(back, 0, Qt::AlignLeft);
 
   // Enable tethering layout
-  ToggleControl *tetheringToggle = new ToggleControl("테더링 활성화", "", "", wifi->isTetheringEnabled());
+  ToggleControl *tetheringToggle = new ToggleControl("Enable Tethering", "", "", wifi->isTetheringEnabled());
   main_layout->addWidget(tetheringToggle);
   QObject::connect(tetheringToggle, &ToggleControl::toggleFlipped, this, &AdvancedNetworking::toggleTethering);
   main_layout->addWidget(horizontal_line(), 0);
 
   // Change tethering password
-  ButtonControl *editPasswordButton = new ButtonControl("테더링 패스워드", "변경");
+  ButtonControl *editPasswordButton = new ButtonControl("Tethering Password", "CHANGE");
   connect(editPasswordButton, &ButtonControl::released, [=]() {
-    QString pass = InputDialog::getText("새로운 패스워드를 입력하세요", this, 8, wifi->getTetheringPassword());
+    QString pass = InputDialog::getText("Enter new tethering password", this, 8, wifi->getTetheringPassword());
     if (!pass.isEmpty()) {
       wifi->changeTetheringPassword(pass);
     }
@@ -144,7 +144,7 @@ AdvancedNetworking::AdvancedNetworking(QWidget* parent, WifiManager* wifi): QWid
   main_layout->addWidget(horizontal_line(), 0);
 
   // IP address
-  ipLabel = new LabelControl("IP 주소", wifi->ipv4_address);
+  ipLabel = new LabelControl("IP Address", wifi->ipv4_address);
   main_layout->addWidget(ipLabel, 0);
   main_layout->addWidget(horizontal_line(), 0);
 
@@ -171,7 +171,7 @@ WifiUI::WifiUI(QWidget *parent, WifiManager* wifi) : QWidget(parent), wifi(wifi)
   main_layout = new QVBoxLayout(this);
 
   // Scan on startup
-  QLabel *scanning = new QLabel("네트워크 검색 중");
+  QLabel *scanning = new QLabel("Searching the network");
   scanning->setStyleSheet(R"(font-size: 65px;)");
   main_layout->addWidget(scanning, 0, Qt::AlignCenter);
   main_layout->setSpacing(25);
@@ -204,7 +204,7 @@ void WifiUI::refresh() {
       forgetBtn->setFixedSize(100, 90);
 
       QObject::connect(forgetBtn, &QPushButton::released, [=]() {
-        if (ConfirmationDialog::confirm(QString::fromUtf8(network.ssid) + " 저장된 네트워크를 지우시겠습니까?", this)) {
+        if (ConfirmationDialog::confirm(QString::fromUtf8(network.ssid) + " Are you sure you want to clear saved networks?", this)) {
           wifi->forgetConnection(network.ssid);
         }
       });
@@ -225,7 +225,7 @@ void WifiUI::refresh() {
     hlayout->addWidget(new NetworkStrengthWidget(strength_scale), 0, Qt::AlignRight);
 
     // connect button
-    QPushButton* btn = new QPushButton(network.security_type == SecurityType::UNSUPPORTED ? "연결불가" : (network.connected == ConnectedType::CONNECTED ? "연결됨" : (network.connected == ConnectedType::CONNECTING ? "연결중" : "연결")));
+    QPushButton* btn = new QPushButton(network.security_type == SecurityType::UNSUPPORTED ? "Unable to connect" : (network.connected == ConnectedType::CONNECTED ? "Connected" : (network.connected == ConnectedType::CONNECTING ? "Connecting" : "CONNECT")));
     btn->setDisabled(network.connected == ConnectedType::CONNECTED || network.connected == ConnectedType::CONNECTING || network.security_type == SecurityType::UNSUPPORTED);
     btn->setFixedWidth(350);
     QObject::connect(btn, &QPushButton::clicked, this, [=]() { emit connectToNetwork(network); });
