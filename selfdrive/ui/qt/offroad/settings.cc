@@ -202,7 +202,7 @@ DevicePanel::DevicePanel(QWidget* parent) : QWidget(parent) {
     });
   }
 
-  auto uninstallBtn = new ButtonControl(getBrand() + " Dashcam", "openpilot");
+  auto uninstallBtn = new ButtonControl(getBrand() + " UNINSTALL", "UNINSTALL");
   connect(uninstallBtn, &ButtonControl::released, [=]() {
     if (ConfirmationDialog::confirm("Are you sure you want to uninstall?", this)) {
       Params().putBool("DoUninstall", true);
