@@ -141,6 +141,12 @@ struct CarEvent @0x9b1657f34caf3ad3 {
     standStill @114;
     modelLongAlert @115;
 	isgActive @116;
+    manualSteeringRequired @117;
+    manualLongitudinalRequired @118;
+    silentPedalPressed @119;
+    silentButtonEnable @120;
+    silentBrakeHold @121;
+    silentWrongGear @122;
   }
 }
 
@@ -198,6 +204,15 @@ struct CarState {
 
   # clutch (manual transmission only)
   clutchPressed @28 :Bool;
+
+  # spektor56's Honda Sensing Stock Mod - 24/7 LKAS
+  lkasEnabled @37 :Bool;
+  leftBlinkerOn @38 :Bool;
+  rightBlinkerOn @39 :Bool;
+  disengageByBrake @40 :Bool;
+  automaticLaneChange @41 :Bool;
+  belowLaneChangeSpeed @42 :Bool;
+  accEnabled @43 :Bool;
 
   # which packets this state came from
   canMonoTimes @12: List(UInt64);
