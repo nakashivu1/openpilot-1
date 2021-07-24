@@ -91,6 +91,7 @@ private:
   void showEvent(QShowEvent *event) override;
 
   QPushButton *accept_btn;
+  QPushButton *decline_btn;
 
 signals:
   void acceptedTerms();
