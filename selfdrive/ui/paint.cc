@@ -369,33 +369,33 @@ static void ui_draw_tpms(UIState *s) {
   snprintf(tpmsFr, sizeof(tpmsFr), "%.1f", scene.tpmsPressureFr);
   snprintf(tpmsRl, sizeof(tpmsRl), "%.1f", scene.tpmsPressureRl);
   snprintf(tpmsRr, sizeof(tpmsRr), "%.1f", scene.tpmsPressureRr);
-  if (scene.tpmsPressureFl < 34) {
+  if (scene.tpmsPressureFl < 29) {
     ui_draw_text(s, pos_x-55, pos_y+50, tpmsFl, 60, COLOR_RED, "sans-bold");
   } else if (scene.tpmsPressureFl > 50) {
     ui_draw_text(s, pos_x-55, pos_y+50, "N/A", 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
   } else {
-    ui_draw_text(s, pos_x-55, pos_y+50, tpmsFl, 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
+    ui_draw_text(s, pos_x-55, pos_y+50, tpmsFl, 60, COLOR_GREEN_ALPHA(200), "sans-semibold");
   }
-  if (scene.tpmsPressureFr < 34) {
+  if (scene.tpmsPressureFr < 29) {
     ui_draw_text(s, pos_x+55, pos_y+50, tpmsFr, 60, COLOR_RED, "sans-bold");
   } else if (scene.tpmsPressureFr > 50) {
     ui_draw_text(s, pos_x+55, pos_y+50, "N/A", 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
   } else {
-    ui_draw_text(s, pos_x+55, pos_y+50, tpmsFr, 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
+    ui_draw_text(s, pos_x+55, pos_y+50, tpmsFr, 60, COLOR_GREEN_ALPHA(200), "sans-semibold");
   }
-  if (scene.tpmsPressureRl < 34) {
+  if (scene.tpmsPressureRl < 29) {
     ui_draw_text(s, pos_x-55, pos_y+100, tpmsRl, 60, COLOR_RED, "sans-bold");
   } else if (scene.tpmsPressureRl > 50) {
     ui_draw_text(s, pos_x-55, pos_y+100, "N/A", 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
   } else {
-    ui_draw_text(s, pos_x-55, pos_y+100, tpmsRl, 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
+    ui_draw_text(s, pos_x-55, pos_y+100, tpmsRl, 60, COLOR_GREEN_ALPHA(200), "sans-semibold");
   }
-  if (scene.tpmsPressureRr < 34) {
+  if (scene.tpmsPressureRr < 29) {
     ui_draw_text(s, pos_x+55, pos_y+100, tpmsRr, 60, COLOR_RED, "sans-bold");
   } else if (scene.tpmsPressureRr > 50) {
     ui_draw_text(s, pos_x+55, pos_y+100, "N/A", 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
   } else {
-    ui_draw_text(s, pos_x+55, pos_y+100, tpmsRr, 60, COLOR_WHITE_ALPHA(200), "sans-semibold");
+    ui_draw_text(s, pos_x+55, pos_y+100, tpmsRr, 60, COLOR_GREEN_ALPHA(200), "sans-semibold");
   }
 }
 
@@ -1180,30 +1180,30 @@ static void bb_ui_draw_UI(UIState *s) {
   bb_ui_draw_measures_left(s, bb_dmr_x, bb_dmr_y-20, bb_dmr_w);
 }
 
-static void draw_navi_button(UIState *s) {
-  if (s->vipc_client->connected || s->scene.is_OpenpilotViewEnabled) {
-    int btn_w = 140;
-    int btn_h = 140;
-    int btn_x1 = s->fb_w - btn_w - 355 - 40;
-    int btn_y = 1080 - btn_h - 30;
-    int btn_xc1 = btn_x1 + (btn_w/2);
-    int btn_yc = btn_y + (btn_h/2);
-    nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-    nvgBeginPath(s->vg);
-    nvgRoundedRect(s->vg, btn_x1, btn_y, btn_w, btn_h, 100);
-    nvgStrokeColor(s->vg, nvgRGBA(0,160,200,255));
-    nvgStrokeWidth(s->vg, 6);
-    nvgStroke(s->vg);
-    nvgFontSize(s->vg, 45);
-    if (s->scene.map_is_running) {
-      NVGcolor fillColor = nvgRGBA(0,160,200,80);
-      nvgFillColor(s->vg, fillColor);
-      nvgFill(s->vg);
-    }
-    nvgFillColor(s->vg, nvgRGBA(255,255,255,200));
-    nvgText(s->vg,btn_xc1,btn_yc,"NAVI",NULL);
-  }
-}
+//static void draw_navi_button(UIState *s) {
+//  if (s->vipc_client->connected || s->scene.is_OpenpilotViewEnabled) {
+//    int btn_w = 140;
+//    int btn_h = 140;
+//    int btn_x1 = s->fb_w - btn_w - 355 - 40;
+//    int btn_y = 1080 - btn_h - 30;
+//    int btn_xc1 = btn_x1 + (btn_w/2);
+//    int btn_yc = btn_y + (btn_h/2);
+//    nvgTextAlign(s->vg, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
+//    nvgBeginPath(s->vg);
+//    nvgRoundedRect(s->vg, btn_x1, btn_y, btn_w, btn_h, 100);
+//    nvgStrokeColor(s->vg, nvgRGBA(0,160,200,255));
+//    nvgStrokeWidth(s->vg, 6);
+//    nvgStroke(s->vg);
+//    nvgFontSize(s->vg, 45);
+//    if (s->scene.map_is_running) {
+//      NVGcolor fillColor = nvgRGBA(0,160,200,80);
+//      nvgFillColor(s->vg, fillColor);
+//      nvgFill(s->vg);
+//    }
+//    nvgFillColor(s->vg, nvgRGBA(255,255,255,200));
+//    nvgText(s->vg,btn_xc1,btn_yc,"NAVI",NULL);
+//  }
+//}
 
 static void draw_laneless_button(UIState *s) {
   if (s->vipc_client->connected || s->scene.is_OpenpilotViewEnabled) {
