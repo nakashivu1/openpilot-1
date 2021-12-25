@@ -343,28 +343,28 @@ static void update_params(UIState *s) {
     scene.is_OpenpilotViewEnabled = params.getBool("IsOpenpilotViewEnabled");
   }
   //opkr navi on boot
-  if (!scene.navi_on_boot && (frame - scene.started_frame > 5*UI_FREQ)) {
-    if (params.getBool("OpkrRunNaviOnBoot") && params.getBool("ControlsReady") && (params.get("CarParams").size() > 0)) {
-      scene.navi_on_boot = true;
-      scene.map_is_running = true;
-      scene.map_on_top = true;
-      scene.map_on_overlay = false;
-      params.putBool("OpkrMapEnable", true);
-      system("am start com.mnsoft.mappyobn/com.mnsoft.mappy.MainActivity");
-    } else if (frame - scene.started_frame > 20*UI_FREQ) {
-      scene.navi_on_boot = true;
-    }
-  }
-  if (!scene.move_to_background && (frame - scene.started_frame > 10*UI_FREQ)) {
-    if (params.getBool("OpkrRunNaviOnBoot") && params.getBool("OpkrMapEnable") && params.getBool("ControlsReady") && (params.get("CarParams").size() > 0)) {
-      scene.move_to_background = true;
-      scene.map_on_top = false;
-      scene.map_on_overlay = true;
-      system("am start --activity-task-on-home com.opkr.maphack/com.opkr.maphack.MainActivity");
-    } else if (frame - scene.started_frame > 20*UI_FREQ) {
-      scene.move_to_background = true;
-    }
-  }
+//  if (!scene.navi_on_boot && (frame - scene.started_frame > 5*UI_FREQ)) {
+//    if (params.getBool("OpkrRunNaviOnBoot") && params.getBool("ControlsReady") && (params.get("CarParams").size() > 0)) {
+//      scene.navi_on_boot = true;
+//      scene.map_is_running = true;
+//      scene.map_on_top = true;
+//      scene.map_on_overlay = false;
+//      params.putBool("OpkrMapEnable", true);
+//      system("am start com.mnsoft.mappyobn/com.mnsoft.mappy.MainActivity");
+//    } else if (frame - scene.started_frame > 20*UI_FREQ) {
+//      scene.navi_on_boot = true;
+//    }
+//  }
+//  if (!scene.move_to_background && (frame - scene.started_frame > 10*UI_FREQ)) {
+//    if (params.getBool("OpkrRunNaviOnBoot") && params.getBool("OpkrMapEnable") && params.getBool("ControlsReady") && (params.get("CarParams").size() > 0)) {
+//      scene.move_to_background = true;
+//      scene.map_on_top = false;
+//      scene.map_on_overlay = true;
+//      system("am start --activity-task-on-home com.opkr.maphack/com.opkr.maphack.MainActivity");
+//    } else if (frame - scene.started_frame > 20*UI_FREQ) {
+//      scene.move_to_background = true;
+//    }
+//  }
   if (!scene.auto_gitpull && (frame - scene.started_frame > 15*UI_FREQ)) {
     if (params.getBool("GitPullOnBoot")) {
       scene.auto_gitpull = true;
