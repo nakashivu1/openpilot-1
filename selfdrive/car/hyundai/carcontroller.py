@@ -282,9 +282,9 @@ class CarController():
 
     # disable if steer angle reach 90 deg, otherwise mdps fault in some models
     if self.opkr_maxanglelimit >= 90 and not self.steer_wind_down_enabled:
-      lkas_active = enabled and abs(CS.out.steeringAngleDeg) < self.opkr_maxanglelimit and CS.out.gearShifter == GearShifter.drive
+      lkas_active = enabled and abs(CS.out.steeringAngleDeg) < self.opkr_maxanglelimit and CS.out.gearShifter != GearShifter.reverse and CS.out.gearShifter != GearShifter.park
     else:
-      lkas_active = enabled and not CS.out.steerWarning and CS.out.gearShifter == GearShifter.drive
+      lkas_active = enabled and not CS.out.steerWarning and CS.out.gearShifter != GearShifter.reverse and CS.out.gearShifter != GearShifter.park
 
     if (( CS.out.leftBlinker and not CS.out.rightBlinker) or ( CS.out.rightBlinker and not CS.out.leftBlinker)) and CS.out.vEgo < LANE_CHANGE_SPEED_MIN and self.opkr_turnsteeringdisable:
       self.lanechange_manual_timer = 50
